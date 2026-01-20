@@ -6,17 +6,21 @@ Handles incoming requests for decision simulation and orchestrates AI agents.
 
 from fastapi import APIRouter, HTTPException
 from models.schemas import DecisionInput
-from agents.outcome_agent import generate_outcomes
-from agents.risk_agent import analyze_risks
 from services.orchestrator import run_simulation
 
 
 router = APIRouter(prefix="/api/simulate", tags=["Simulation"])
 
-@router.post("/decision")
+@router.post("")
 def simulate_decision(payload: DecisionInput):
     """
     Runs full decision simulation using all AI agents.
+    
+    Args:
+        payload (DecisionInput): User's decision and context.
+    
+    Returns:
+        dict: Simulation result with all agent outputs.
     """
 
     try:
@@ -24,4 +28,4 @@ def simulate_decision(payload: DecisionInput):
         return result
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Simulation failed.")
+        raise HTTPException(status_code=500, detail=f"Simulation failed: {str(e)}")

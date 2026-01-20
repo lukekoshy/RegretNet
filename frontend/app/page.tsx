@@ -17,21 +17,25 @@ export default function Home() {
 
     setLoading(true);
 
-    const res = await fetch("http://localhost:8000/api/simulate/decision", {
-      
+    try {
+      const res = await fetch("/api/simulate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           decision,
           context: "User seeking long-term impact analysis",
         }),
-      }
-    );
+      });
 
-    const data = await res.json();
-    setResult(data);
-    setLoading(false);
+      const data = await res.json();
+      setResult(data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-black via-purple-900 to-indigo-900 text-white flex items-center justify-center px-6">
@@ -86,7 +90,7 @@ export default function Home() {
               <div className="bg-red-500/10 border border-red-400/30 rounded-2xl p-6">
                 <h3 className="text-red-400 font-semibold mb-2">Risks</h3>
                 <ul className="list-disc ml-5 text-white/80">
-                  {result.risks.map((r: string, i: number) => (
+                  {result.risks && Array.isArray(result.risks) && result.risks.map((r: string, i: number) => (
                     <li key={i}>{r}</li>
                   ))}
                 </ul>
@@ -97,7 +101,7 @@ export default function Home() {
                   Growth Opportunities
                 </h3>
                 <ul className="list-disc ml-5 text-white/80">
-                  {result.growth_opportunities.map((g: string, i: number) => (
+                  {result.growth_opportunities && Array.isArray(result.growth_opportunities) && result.growth_opportunities.map((g: string, i: number) => (
                     <li key={i}>{g}</li>
                   ))}
                 </ul>

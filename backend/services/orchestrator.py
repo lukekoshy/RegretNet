@@ -16,47 +16,22 @@ logger = logging.getLogger(__name__)
 
 def run_simulation(decision: str, context: str | None) -> dict:
     """
-    Runs all AI agents and aggregates their outputs.
-
+    Runs all AI agents and returns structured validated results.
+    
     Args:
         decision (str): User's decision.
         context (str | None): Optional context.
-
+    
     Returns:
-        dict: Combined agent outputs.
-    """
-
-    try:
-        outcomes = generate_outcomes(decision, context)
-        risks = analyze_risks(decision)
-        growth = analyze_growth(decision)
-        emotions = analyze_emotions(decision)
-        future_message = generate_future_message(decision)
-
-        return {
-            "outcomes": outcomes,
-            "risks": risks,
-            "growth": growth,
-            "emotions": emotions,
-            "future_self_message": future_message
-        }
-
-    except Exception as e:
-        logger.error(f"Simulation failed: {str(e)}")
-        raise
-
-
-def run_simulation(decision: str, context: str | None) -> dict:
-    """
-    Runs all AI agents and returns structured validated results.
+        dict: Combined agent outputs with proper field names.
     """
 
     try:
         raw = {
             "outcomes": generate_outcomes(decision, context),
             "risks": analyze_risks(decision),
-            "growth": analyze_growth(decision),
-            "emotions": analyze_emotions(decision),
+            "growth_opportunities": analyze_growth(decision),
+            "emotional_outcomes": analyze_emotions(decision),
             "future_self_message": generate_future_message(decision)
         }
 

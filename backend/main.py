@@ -4,12 +4,12 @@ Main application entry point for the RegretNet AI backend.
 This file initializes the FastAPI app, loads environment variables,
 registers API routes, and starts the server.
 """
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from api.simulate import router as simulate_router
 from services.logger import setup_logger
 
 setup_logger()
-
-from fastapi import FastAPI
-from api.simulate import router as simulate_router
 
 app = FastAPI(title="RegretNet AI", version="1.0")
 
@@ -25,8 +25,6 @@ def health_check():
         dict: Status message.
     """
     return {"status": "RegretNet backend is running"}
-
-from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
