@@ -11,7 +11,7 @@ from agents.risk_agent import analyze_risks
 from services.orchestrator import run_simulation
 
 
-router = APIRouter(prefix="/simulate", tags=["Simulation"])
+router = APIRouter(prefix="/api/simulate", tags=["Simulation"])
 
 @router.post("/decision")
 def simulate_decision(payload: DecisionInput):

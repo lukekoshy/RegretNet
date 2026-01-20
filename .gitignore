@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.env
+.env.local
+venv/
+env/
+ENV/
+.venv
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node.js
+node_modules/
+.next/
+out/
+npm-debug.log
+yarn-error.log
+.npm
+.eslintcache
+.node_repl_history
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/

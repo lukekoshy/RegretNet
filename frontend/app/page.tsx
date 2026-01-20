@@ -17,7 +17,7 @@ export default function Home() {
 
     setLoading(true);
 
-    const res = await fetch("/api/simulate", {
+    const res = await fetch("http://localhost:8000/api/simulate/decision", {
       
         method: "POST",
         headers: { "Content-Type": "application/json" },
