@@ -36,16 +36,12 @@ export async function POST(req: Request) {
 
     const data = await response.json();
 
-    if (!data.choices) {
-      console.error("OpenRouter error:", data);
-      return NextResponse.json({ error: "AI failed" }, { status: 500 });
-    }
-
     return NextResponse.json({
-      future_self_message: data.choices[0].message.content,
+      future_self_message: data.choices?.[0]?.message?.content || "No response",
       risks: ["Missed opportunities", "Loss of discipline"],
       growth_opportunities: ["Better habits", "Stronger mindset"],
     });
+
   } catch (error) {
     console.error("Server crash:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
